@@ -7,6 +7,6 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://the-chapterhouse.netlify.app/ "
+  to = "https://the-chapter-house-backend.onrender.com"
   status = 200
   force = true
