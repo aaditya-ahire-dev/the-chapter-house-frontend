@@ -1,0 +1,12 @@
+# This section ensures that Netlify's CDN will never cache responses 
+# from your API, forcing a fresh check every time.
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate, max-age=0"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://the-chapterhouse.netlify.app/ "
+  status = 200
+  force = true
