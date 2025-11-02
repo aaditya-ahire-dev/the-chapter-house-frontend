@@ -1,10 +1,12 @@
 import AdminNavbar from "@/app/components/AdminNavbar";
 import "../globals.css";
-import { verifySession } from "@/app/lib/session.js";
+// import { verifySession } from "@/app/lib/session.js";
+import { useAuth } from '@/app/lib/AuthContext';
 
 async function AdminLayout({ children }) {
-  const session = await verifySession();
-  if (!session) {
+  // const session = await verifySession();
+    const { user: authUser, userRole } = useAuth();
+  if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-blue-50 px-4">
         <div className="bg-white p-6 sm:p-10 rounded-lg shadow-xl text-center border-t-4 border-blue-500 w-full max-w-md">
@@ -19,7 +21,7 @@ async function AdminLayout({ children }) {
       </div>
     );
   }
-  if (session.role !== "admin") {
+  if (userRole.role !== "admin") {
     return (
       <div className="flex items-center justify-center min-h-screen bg-red-50 px-4">
         <div className="bg-white p-6 sm:p-10 rounded-lg shadow-xl text-center border-t-4 border-red-500 w-full max-w-md">
