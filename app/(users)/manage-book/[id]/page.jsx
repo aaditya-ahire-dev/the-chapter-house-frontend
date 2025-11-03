@@ -10,7 +10,7 @@ import {
 import BookCoverColumn from "@/app/components/buyed-book/BookCoverColumn";
 import BookInfoColumn from "@/app/components/buyed-book/BookInfoColumn";
 import DownloadActionColumn from "@/app/components/buyed-book/DownloadActionColumn";
-
+import axios from "axios";
 function BuyedBookDetails({ params }) {
 
   const resolvedParams = use(params);
@@ -71,8 +71,17 @@ function BuyedBookDetails({ params }) {
 
   const handleDownload = async () => {
     try {
+        const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/book/downloadbook/${book._id}?t=${Date.now()}`,
+        {
+          responseType: "blob",
+          withCredentials: true,
+        }
+        );
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
-      link.href = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/book/downloadbook/${book._id}?t=${new Date().getTime()}`;
+      link.href = url;
       link.setAttribute("download", `${book.title}.pdf`);
       document.body.appendChild(link);
       link.click();
