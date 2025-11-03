@@ -19,6 +19,7 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@csstools/postcss-oklab-function": "^4.0.12",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
