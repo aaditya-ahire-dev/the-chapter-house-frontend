@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ProfileIcon } from "@/app/services/IconSvg";
 import { adminLogoutAction } from "@/app/lib/action";
 import { useAuth } from "@/app/lib/AuthContext";
+import {signOut} from 'firebase/auth'
+import { auth } from '@/app/lib/firebase';
 
 function AdminNavbar() {
   const { user: authUser, userRole } = useAuth();
@@ -11,9 +13,10 @@ function AdminNavbar() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [admin, setAdmin] = useState(user);
-  const handleLogout = () => {
+  const handleLogout = async () => {
     adminLogoutAction();
     setAdmin(null);
+    await signOut(auth)
   };
 
   return (
