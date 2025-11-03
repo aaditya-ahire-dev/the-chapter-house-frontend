@@ -72,7 +72,7 @@ function BuyedBookDetails({ params }) {
   const handleDownload = async () => {
     try {
       const link = document.createElement("a");
-      link.href = `${NEXT_PUBLIC_BACKEND_API_URL}/api/book/downloadbook/${book._id}?t=${new Date().getTime()}`;
+      link.href = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/book/downloadbook/${book._id}?t=${new Date().getTime()}`;
       link.setAttribute("download", `${book.title}.pdf`);
       document.body.appendChild(link);
       link.click();
